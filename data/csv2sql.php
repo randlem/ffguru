@@ -12,7 +12,7 @@ while (($row = fgetcsv($in, 1000, ",")) !== FALSE) {
 
 
 	$players[] = sprintf('(%d,"%s","%s",%d,"%s")',
-		$num, addslashes($row[0]), $row[1],	$row[2], $row[3]
+		$num, $row[0], $row[1],	$row[2], $row[3]
 	);
 
 	$pricing[] = sprintf("(%d, %d, 0, 0, %d)",

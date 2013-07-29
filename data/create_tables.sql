@@ -13,3 +13,5 @@ CREATE TABLE pricing (
 	paid INTEGER,
 	inflated INTEGER
 );
+
+ALTER TABLE players ADD COLUMN mine INTEGER;

@@ -36,11 +36,6 @@ $app->get('/show(/:position)', function ($position=NULL) use ($app, $db) {
 		FROM players
 		LEFT JOIN pricing USING (id)
 	';
-
-	if ($position) {
-		$sql .= 'WHERE position = "'. $db->escapeString($position). '"';
-	}
-
 	$results = $db->query($sql);
 
 	if (!$results) {
@@ -91,7 +86,9 @@ $app->get('/show(/:position)', function ($position=NULL) use ($app, $db) {
 		),
 	);
 	while ($row = $results->fetchArray(SQLITE3_ASSOC)) {
-		$players[] = $row;
+		if ($position == NULL || $row['position'] == $position) {
+			$players[] = $row;
+		}
 
 		if ($row['mine']) {
 			$total += $row['paid'];

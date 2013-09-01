@@ -15,6 +15,10 @@
 			background-color: #1e90ff;
 			color: #fff;
 		}
+		.paid td {
+			background-color: #e2725b;
+			color: #fff;
+		}
 	</style>
 </head>
 <body>
@@ -66,14 +70,20 @@
 	</tr>
 	<? foreach ($players as $player) :
 		$paid = '';
+		$rowclass = '';
 		if ($player['paid'] == 0) :
 			$url  = $app->urlFor('buy', array('id' => $player['id']));
 			$paid = '<form action="'. $url. '" method="post"><input type="text" maxlength="3" size="3" name="price" />&nbsp;<input type="checkbox" value="1" name="mine" />&nbsp;<input type="submit" value="BUY" /></form>';
 		else :
-			$paid = $player['paid'];
+			$rowclass = 'paid';
+			$paid     = $player['paid'];
+		endif;
+
+		if ($player['mine']) :
+			$rowclass = 'mine';
 		endif;
 	?>
-	<tr class="<?= $player['mine'] ? 'mine' : '' ?>">
+	<tr class="<?= $rowclass ?>">
 		<td style="text-align: left"><?= $player['name']; ?>&nbsp;(<?= $player['team']; ?>)</td>
 		<td><?= $player['position']; ?></td>
 		<td><?= $player['bye']; ?></td>

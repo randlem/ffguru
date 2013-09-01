@@ -145,6 +145,8 @@ $app->post('/buy/:id', function ($id) use ($app, $db) {
 	$stmt->bindValue(':mine', ($mine) ? 1 : 0, SQLITE3_INTEGER);
 	$stmt->execute();
 
+	$app->redirect($app->urlFor('show'));
+
 })->name('buy');
 
 $app->run();
